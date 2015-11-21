@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "NilPortugues\\Serializer\\Drivers\\Eloquent": "src/"
+            "NilPortugues\\Serializer\\Drivers\\Eloquent\\": "src/"
         }
     },
     "autoload-dev": {
