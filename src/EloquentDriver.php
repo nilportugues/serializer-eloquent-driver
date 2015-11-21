@@ -22,6 +22,14 @@ use ReflectionMethod;
  */
 class EloquentDriver
 {
+    /**
+     * @var \NilPortugues\Serializer\Serializer
+     */
+    private $serializer;
+
+    /**
+     * @param Serializer $serializer
+     */
     public function __construct(Serializer $serializer)
     {
         $this->serializer = $serializer;
