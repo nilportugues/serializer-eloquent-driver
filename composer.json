@@ -1,5 +1,5 @@
 {
-    "name": "nilportugues/serializer-eloquent-driver",
+    "name": "nilportugues/serializer-eloquent",
     "type": "library",
     "description": "Eloquent Driver for NilPortugues Serializer outputting valid API responses in JSON, JSON API and HAL+JSON API formats.",
     "keywords": ["laravel", "eloquent", "orm", "nilportugues", "json", "api", "jsonapi", "serializer", "transformer", "psr7", "response"],
