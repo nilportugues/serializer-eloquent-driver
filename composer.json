@@ -1,0 +1,40 @@
+{
+    "name": "nilportugues/serializer-eloquent-driver",
+    "type": "library",
+    "description": "Eloquent Driver for NilPortugues Serializer outputting valid API responses in JSON, JSON API and HAL+JSON API formats.",
+    "keywords": ["laravel", "eloquent", "orm", "nilportugues", "json", "api", "jsonapi", "serializer", "transformer", "psr7", "response"],
+    "homepage": "http://nilportugues.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nil Portugués Calderó",
+            "email": "contact@nilportugues.com",
+            "role": "Project Lead Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "nilportugues/serializer": "~1.1",
+        "illuminate/database": "^5.1"
+
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.4.*",
+        "fabpot/php-cs-fixer": "^1.9",
+        "mmoreram/php-formatter": "dev-master",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "NilPortugues\\Serializer\\Drivers\\Eloquent": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent": "tests/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin/"
+    }
+}
