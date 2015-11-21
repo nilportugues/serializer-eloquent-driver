@@ -38,7 +38,7 @@ class Driver extends Serializer
     public function serialize($value)
     {
         $this->reset();
-        return $this->serializeData($value);
+        return $this->serializeObject($value);
     }
 
     /**
