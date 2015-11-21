@@ -31,7 +31,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent": "tests/"
+            "NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\": "tests/"
         }
     },
     "config": {
