@@ -69,7 +69,7 @@ class Driver extends Serializer
         }
 
         if (\is_subclass_of($value, Model::class, true)) {
-            $stdClass = (object) $value->getAttributes();
+            $stdClass = (object) $value->attributesToArray();
             $data = $this->serializeData($stdClass);
             $data[self::CLASS_IDENTIFIER_KEY] = \get_class($value);
 

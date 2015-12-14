@@ -1,5 +1,10 @@
 # Serializer Driver for Eloquent ORM Models
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nilportugues/serializer-eloquent-driver/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nilportugues/serializer-eloquent-driver/?branch=master) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/497f9e58-e979-453e-bc04-b1501b88d027/mini.png?)](https://insight.sensiolabs.com/projects/497f9e58-e979-453e-bc04-b1501b88d027) 
+[![Latest Stable Version](https://poser.pugx.org/nilportugues/serializer-eloquent/v/stable?)](https://packagist.org/packages/nilportugues/serializer-eloquent) 
+[![Total Downloads](https://poser.pugx.org/nilportugues/serializer-eloquent/downloads?)](https://packagist.org/packages/nilportugues/serializer-eloquent) 
+[![License](https://poser.pugx.org/nilportugues/serializer-eloquent/license?)](https://packagist.org/packages/nilportugues/serializer-eloquent) 
+
 ## What?
 This is a driver for the [Serializer](https://github.com/nilportugues/serializer) library caring of Eloquent ORM model serialization.
 
