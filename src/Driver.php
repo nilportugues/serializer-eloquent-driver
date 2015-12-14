@@ -52,7 +52,7 @@ class Driver extends Serializer
     {
         if ($value instanceof \Illuminate\Database\Eloquent\Collection) {
             $items = [];
-            foreach ($value as &$v) {
+            foreach ($value as $v) {
                 $items[] = $this->serializeObject($v);
             }
 
@@ -61,7 +61,7 @@ class Driver extends Serializer
 
         if ($value instanceof \Illuminate\Contracts\Pagination\Paginator) {
             $items = [];
-            foreach ($value->items() as &$v) {
+            foreach ($value->items() as $v) {
                 $items[] = $this->serializeObject($v);
             }
 
