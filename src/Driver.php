@@ -2,7 +2,7 @@
 /**
  * Author: Nil Portugués Calderó <contact@nilportugues.com>
  * Date: 11/21/15
- * Time: 3:44 PM
+ * Time: 3:44 PM.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,8 +17,7 @@ use ReflectionClass;
 use ReflectionMethod;
 
 /**
- * Class Driver
- * @package NilPortugues\Laravel5\Serializer
+ * Class Driver.
  */
 class Driver extends Serializer
 {
@@ -67,7 +66,6 @@ class Driver extends Serializer
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -78,6 +76,7 @@ class Driver extends Serializer
     public function serialize($value)
     {
         $this->reset();
+
         return $this->serializeObject($value);
     }
 
@@ -143,7 +142,6 @@ class Driver extends Serializer
                 // Eloquent relations do not include parameters, so we'll be filtering based on this criteria.
                 if (0 == $reflectionMethod->getNumberOfParameters()) {
                     try {
-
                         if (false === in_array($name, $this->forbiddenFunction, true)) {
                             $returned = $reflectionMethod->invoke($value);
                             //All operations (eg: boolean operations) are now filtered out.
@@ -155,7 +153,7 @@ class Driver extends Serializer
                                     $items = [];
                                     foreach ($returned->getResults() as $model) {
                                         if (\is_object($model)) {
-                                            /** @var Model $model */
+                                            /* @var Model $model */
                                             $stdClass = (object) $model->getAttributes();
                                             $data = $this->serializeData($stdClass);
                                             $data[self::CLASS_IDENTIFIER_KEY] = \get_class($model);
@@ -169,7 +167,6 @@ class Driver extends Serializer
                                 }
                             }
                         }
-
                     } catch (ErrorException $e) {
                     }
                 }
@@ -178,4 +175,4 @@ class Driver extends Serializer
 
         return $methods;
     }
-} 
+}
