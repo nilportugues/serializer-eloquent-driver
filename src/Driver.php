@@ -23,6 +23,46 @@ use ReflectionMethod;
 class Driver extends Serializer
 {
     /**
+     * @var array
+     */
+    private $forbiddenFunction = [
+        'forceDelete',
+        'forceFill',
+        'delete',
+        'newQueryWithoutScopes',
+        'newQuery',
+        'bootIfNotBooted',
+        'boot',
+        'bootTraits',
+        'clearBootedModels',
+        'query',
+        'onWriteConnection',
+        'delete',
+        'forceDelete',
+        'performDeleteOnModel',
+        'flushEventListeners',
+        'push',
+        'touchOwners',
+        'touch',
+        'updateTimestamps',
+        'freshTimestamp',
+        'freshTimestampString',
+        'newQuery',
+        'newQueryWithoutScopes',
+        'newBaseQueryBuilder',
+        'usesTimestamps',
+        'reguard',
+        'isUnguarded',
+        'totallyGuarded',
+        'syncOriginal',
+        'getConnectionResolver',
+        'unsetConnectionResolver',
+        'getEventDispatcher',
+        'unsetEventDispatcher',
+        '__toString',
+        '__wakeup',
+    ];
+    /**
      *
      */
     public function __construct()
@@ -103,29 +143,33 @@ class Driver extends Serializer
                 // Eloquent relations do not include parameters, so we'll be filtering based on this criteria.
                 if (0 == $reflectionMethod->getNumberOfParameters()) {
                     try {
-                        $returned = $reflectionMethod->invoke($value);
-                        //All operations (eg: boolean operations) are now filtered out.
-                        if (\is_object($returned)) {
 
-                            // Only keep those methods as properties if these are returning Eloquent relations.
-                            // But do not run the operation as it is an expensive operation.
-                            if (false !== \strpos(\get_class($returned), 'Illuminate\Database\Eloquent\Relations')) {
-                                $items = [];
-                                foreach ($returned->getResults() as $model) {
-                                    if (\is_object($model)) {
-                                        /** @var Model $model */
-                                        $stdClass = (object) $model->getAttributes();
-                                        $data = $this->serializeData($stdClass);
-                                        $data[self::CLASS_IDENTIFIER_KEY] = \get_class($model);
+                        if (false === in_array($value, $this->forbiddenFunction, true)) {
+                            $returned = $reflectionMethod->invoke($value);
+                            //All operations (eg: boolean operations) are now filtered out.
+                            if (\is_object($returned)) {
 
-                                        $items[] = $data;
+                                // Only keep those methods as properties if these are returning Eloquent relations.
+                                // But do not run the operation as it is an expensive operation.
+                                if (false !== \strpos(\get_class($returned), 'Illuminate\Database\Eloquent\Relations')) {
+                                    $items = [];
+                                    foreach ($returned->getResults() as $model) {
+                                        if (\is_object($model)) {
+                                            /** @var Model $model */
+                                            $stdClass = (object) $model->getAttributes();
+                                            $data = $this->serializeData($stdClass);
+                                            $data[self::CLASS_IDENTIFIER_KEY] = \get_class($model);
+
+                                            $items[] = $data;
+                                        }
                                     }
-                                }
-                                if (!empty($items)) {
-                                    $methods[$name] = [self::MAP_TYPE => 'array', self::SCALAR_VALUE => $items];
+                                    if (!empty($items)) {
+                                        $methods[$name] = [self::MAP_TYPE => 'array', self::SCALAR_VALUE => $items];
+                                    }
                                 }
                             }
                         }
+
                     } catch (ErrorException $e) {
                     }
                 }
