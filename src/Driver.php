@@ -144,7 +144,7 @@ class Driver extends Serializer
                 if (0 == $reflectionMethod->getNumberOfParameters()) {
                     try {
 
-                        if (false === in_array($value, $this->forbiddenFunction, true)) {
+                        if (false === in_array($name, $this->forbiddenFunction, true)) {
                             $returned = $reflectionMethod->invoke($value);
                             //All operations (eg: boolean operations) are now filtered out.
                             if (\is_object($returned)) {
