@@ -98,7 +98,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                     0 => array(
                             '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\User',
                             'id' => array(
-                                    '@scalar' => 'string',
+                                    '@scalar' => 'integer',
                                     '@value' => '1',
                                 ),
                             'username' => array(
@@ -162,7 +162,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\User',
             'id' => array(
-                    '@scalar' => 'string',
+                    '@scalar' => 'integer',
                     '@value' => '1',
                 ),
             'username' => array(
