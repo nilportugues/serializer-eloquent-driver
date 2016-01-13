@@ -10,57 +10,18 @@
 
 namespace NilPortugues\Serializer\Drivers\Eloquent;
 
-use NilPortugues\Serializer\Serializer;
-use ErrorException;
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use NilPortugues\Serializer\Drivers\Eloquent\Helper\RelationshipPropertyExtractor;
+use NilPortugues\Serializer\Serializer;
 use ReflectionClass;
-use ReflectionMethod;
 
 /**
  * Class Driver.
  */
 class Driver extends Serializer
 {
-    /**
-     * @var array
-     */
-    private $forbiddenFunction = [
-        'forceDelete',
-        'forceFill',
-        'delete',
-        'newQueryWithoutScopes',
-        'newQuery',
-        'bootIfNotBooted',
-        'boot',
-        'bootTraits',
-        'clearBootedModels',
-        'query',
-        'onWriteConnection',
-        'delete',
-        'forceDelete',
-        'performDeleteOnModel',
-        'flushEventListeners',
-        'push',
-        'touchOwners',
-        'touch',
-        'updateTimestamps',
-        'freshTimestamp',
-        'freshTimestampString',
-        'newQuery',
-        'newQueryWithoutScopes',
-        'newBaseQueryBuilder',
-        'usesTimestamps',
-        'reguard',
-        'isUnguarded',
-        'totallyGuarded',
-        'syncOriginal',
-        'getConnectionResolver',
-        'unsetConnectionResolver',
-        'getEventDispatcher',
-        'unsetEventDispatcher',
-        '__toString',
-        '__wakeup',
-    ];
     /**
      *
      */
@@ -89,90 +50,73 @@ class Driver extends Serializer
      */
     protected function serializeObject($value)
     {
-        if ($value instanceof \Illuminate\Database\Eloquent\Collection) {
-            $items = [];
-            foreach ($value as $v) {
-                $items[] = $this->serializeObject($v);
-            }
-
-            return [self::MAP_TYPE => 'array', self::SCALAR_VALUE => $items];
+        if ($value instanceof Collection) {
+            return $this->serializeEloquentCollection($value);
         }
 
-        if ($value instanceof \Illuminate\Contracts\Pagination\Paginator) {
-            $items = [];
-            foreach ($value->items() as $v) {
-                $items[] = $this->serializeObject($v);
-            }
-
-            return [self::MAP_TYPE => 'array', self::SCALAR_VALUE => $items];
+        if ($value instanceof Paginator) {
+            return $this->serializeEloquentPaginatedResource($value);
         }
 
         if (\is_subclass_of($value, Model::class, true)) {
-            $stdClass = (object) $value->attributesToArray();
-            $data = $this->serializeData($stdClass);
-            $data[self::CLASS_IDENTIFIER_KEY] = \get_class($value);
-
-            $methods = $this->getRelationshipAsPropertyName($value, get_class($value), new ReflectionClass($value));
-
-            if (!empty($methods)) {
-                $data = \array_merge($data, $methods);
-            }
-
-            return $data;
+            return $this->serializeEloquentModel($value);
         }
 
         return parent::serializeObject($value);
     }
 
     /**
-     * @param                 $value
-     * @param string          $className
-     * @param ReflectionClass $reflection
+     * @param Collection $value
      *
      * @return array
      */
-    protected function getRelationshipAsPropertyName($value, $className, ReflectionClass $reflection)
+    protected function serializeEloquentCollection(Collection $value)
     {
-        $methods = [];
-        foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            if (\ltrim($method->class, '\\') === \ltrim($className, '\\')) {
-                $name = $method->name;
-                $reflectionMethod = $reflection->getMethod($name);
-
-                // Eloquent relations do not include parameters, so we'll be filtering based on this criteria.
-                if (0 == $reflectionMethod->getNumberOfParameters()) {
-                    try {
-                        if (false === in_array($name, $this->forbiddenFunction, true)) {
-                            $returned = $reflectionMethod->invoke($value);
-                            //All operations (eg: boolean operations) are now filtered out.
-                            if (\is_object($returned)) {
-
-                                // Only keep those methods as properties if these are returning Eloquent relations.
-                                // But do not run the operation as it is an expensive operation.
-                                if (false !== \strpos(\get_class($returned), 'Illuminate\Database\Eloquent\Relations')) {
-                                    $items = [];
-                                    foreach ($returned->getResults() as $model) {
-                                        if (\is_object($model)) {
-                                            /* @var Model $model */
-                                            $stdClass = (object) $model->getAttributes();
-                                            $data = $this->serializeData($stdClass);
-                                            $data[self::CLASS_IDENTIFIER_KEY] = \get_class($model);
-
-                                            $items[] = $data;
-                                        }
-                                    }
-                                    if (!empty($items)) {
-                                        $methods[$name] = [self::MAP_TYPE => 'array', self::SCALAR_VALUE => $items];
-                                    }
-                                }
-                            }
-                        }
-                    } catch (ErrorException $e) {
-                    }
-                }
-            }
+        $items = [];
+        foreach ($value as $v) {
+            $items[] = $this->serializeObject($v);
         }
 
-        return $methods;
+        return [self::MAP_TYPE => 'array', self::SCALAR_VALUE => $items];
+    }
+
+    /**
+     * @param Paginator $value
+     *
+     * @return array
+     */
+    protected function serializeEloquentPaginatedResource(Paginator $value)
+    {
+        $items = [];
+        foreach ($value->items() as $v) {
+            $items[] = $this->serializeObject($v);
+        }
+
+        return [self::MAP_TYPE => 'array', self::SCALAR_VALUE => $items];
+    }
+
+    /**
+     * @param Model $value
+     *
+     * @return array
+     */
+    protected function serializeEloquentModel(Model $value)
+    {
+        $stdClass = (object) $value->attributesToArray();
+        $data = $this->serializeData($stdClass);
+        $data[self::CLASS_IDENTIFIER_KEY] = get_class($value);
+
+        $methods = RelationshipPropertyExtractor::getRelationshipAsPropertyName(
+            $value,
+            get_class($value),
+            new ReflectionClass($value),
+            $this
+        );
+
+        if (!empty($methods)) {
+            $data = array_merge($data, $methods);
+        }
+
+        return $data;
     }
 }
