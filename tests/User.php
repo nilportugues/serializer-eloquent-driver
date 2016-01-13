@@ -26,4 +26,12 @@ class User extends Model
      * @var string
      */
     protected $table = 'users';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function latestOrders()
+    {
+        return $this->hasMany(Orders::class, 'user_id')->limit(10);
+    }
 }
