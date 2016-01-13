@@ -1,5 +1,6 @@
 # Serializer Driver for Eloquent ORM Models
 
+[![Build Status](https://travis-ci.org/nilportugues/serializer-eloquent-driver.svg)](https://travis-ci.org/nilportugues/serializer-eloquent-driver)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nilportugues/serializer-eloquent-driver/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nilportugues/serializer-eloquent-driver/?branch=master) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/497f9e58-e979-453e-bc04-b1501b88d027/mini.png?)](https://insight.sensiolabs.com/projects/497f9e58-e979-453e-bc04-b1501b88d027) 
 [![Latest Stable Version](https://poser.pugx.org/nilportugues/serializer-eloquent/v/stable?)](https://packagist.org/packages/nilportugues/serializer-eloquent) 
 [![Total Downloads](https://poser.pugx.org/nilportugues/serializer-eloquent/downloads?)](https://packagist.org/packages/nilportugues/serializer-eloquent) 
