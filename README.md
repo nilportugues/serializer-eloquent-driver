@@ -32,6 +32,17 @@ $serialized = EloquentDriver::serialize($value);
 ```
 
 
+## Todo
+
+Code all examples provided in the Eloquent documentation for relationships as tests:
+
+- [ ] One To One
+- [X] One To Many
+- [ ] Many To Many
+- [ ] Has Many Through
+- [ ] Polymorphic Relations
+- [ ] Many To Many Polymorphic Relations
+
 ## Contribute
 
 Contributions to the package are always welcome!

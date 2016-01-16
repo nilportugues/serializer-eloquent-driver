@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Serializer\Drivers\Eloquent;
+namespace NilPortugues\Tests\Serializer\Drivers\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

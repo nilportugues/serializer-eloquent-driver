@@ -77,18 +77,26 @@ class RelationshipPropertyExtractor
                     try {
                         if (self::isAllowedEloquentModelFunction($name)) {
                             $returned = $reflectionMethod->invoke($value);
+
                             //All operations (eg: boolean operations) are now filtered out.
                             if (\is_object($returned)) {
 
-                                // Only keep those methods as properties if these are returning Eloquent relations.
-                                // But do not run the operation as it is an expensive operation.
                                 if (self::isAnEloquentRelation($returned)) {
                                     $items = [];
-                                    foreach ($returned->getResults() as $model) {
-                                        if (\is_object($model)) {
-                                            $items[] = self::getModelData($serializer, $model);
+                                    $relationData = $returned->getResults();
+
+                                    if (\is_object($relationData)) {
+                                        //Collection with Models
+                                        foreach ($relationData as $model) {
+                                            if(\is_object($model)) {
+                                                $items[] = self::getModelData($serializer, $model);
+                                            }
                                         }
+                                    } elseif(\is_object($relationData) && $relationData instanceof Model) {
+                                        //Single element returned.
+                                        $items[] = self::getModelData($serializer, $relationData);
                                     }
+
                                     if (!empty($items)) {
                                         $methods[$name] = [
                                             Serializer::MAP_TYPE => 'array',
@@ -114,7 +122,7 @@ class RelationshipPropertyExtractor
      */
     protected static function isAllowedEloquentModelFunction($name)
     {
-        return false === in_array($name, self::$forbiddenFunction, true);
+         return false === in_array($name, self::$forbiddenFunction, true);
     }
 
     /**
@@ -135,7 +143,7 @@ class RelationshipPropertyExtractor
      */
     protected static function getModelData(Driver $serializer, Model $model)
     {
-        $stdClass = (object) $model->getAttributes();
+        $stdClass = (object) $model->attributesToArray();
         $data = $serializer->serialize($stdClass);
         $data[Serializer::CLASS_IDENTIFIER_KEY] = get_class($model);
 

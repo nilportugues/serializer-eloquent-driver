@@ -12,6 +12,8 @@ namespace NilPortugues\Tests\Serializer\Drivers\Eloquent;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use NilPortugues\Serializer\Drivers\Eloquent\EloquentDriver;
+use NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Orders;
+use NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\User;
 
 class DriverTest extends \PHPUnit_Framework_TestCase
 {
@@ -96,7 +98,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase
             '@map' => 'array',
             '@value' => array(
                     0 => array(
-                            '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\User',
+                            '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\User',
                             'id' => array(
                                     '@scalar' => 'integer',
                                     '@value' => '1',
@@ -129,7 +131,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                                     '@map' => 'array',
                                     '@value' => array(
                                             0 => array(
-                                                    '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Orders',
+                                                    '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\Orders',
                                                     'user_id' => array(
                                                             '@scalar' => 'string',
                                                             '@value' => '1',
@@ -160,7 +162,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase
         $output = $driver->serialize($user);
 
         $expected = array(
-            '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\User',
+            '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\User',
             'id' => array(
                     '@scalar' => 'integer',
                     '@value' => '1',
@@ -193,7 +195,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                     '@map' => 'array',
                     '@value' => array(
                             0 => array(
-                                    '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Orders',
+                                    '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\Orders',
                                     'user_id' => array(
                                             '@scalar' => 'string',
                                             '@value' => '1',

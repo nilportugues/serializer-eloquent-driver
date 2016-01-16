@@ -1,6 +1,6 @@
 <?php
 
-namespace NilPortugues\Tests\Serializer\Drivers\Eloquent;
+namespace NilPortugues\Tests\Serializer\Drivers\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

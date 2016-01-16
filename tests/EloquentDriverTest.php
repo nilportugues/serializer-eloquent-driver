@@ -12,6 +12,7 @@ namespace NilPortugues\Tests\Serializer\Drivers\Eloquent;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use NilPortugues\Serializer\Drivers\Eloquent\EloquentDriver;
+use NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\User;
 
 /**
  * Class EloquentDriverTest.
