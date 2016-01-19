@@ -68,47 +68,46 @@ class RelationshipPropertyExtractor
     ) {
         $methods = [];
         foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            if (\ltrim($method->class, '\\') === \ltrim($className, '\\')) {
-                $name = $method->name;
-                $reflectionMethod = $reflection->getMethod($name);
+            if (\ltrim($method->class, '\\') !== \ltrim($className, '\\')) {
+                continue;
+            }
 
-                // Eloquent relations do not include parameters, so we'll be filtering based on this criteria.
-                if (0 == $reflectionMethod->getNumberOfParameters()) {
-                    try {
-                        if (self::isAllowedEloquentModelFunction($name)) {
-                            $returned = $reflectionMethod->invoke($value);
+            $name = $method->name;
+            $reflectionMethod = $reflection->getMethod($name);
 
-                            //All operations (eg: boolean operations) are now filtered out.
-                            if (\is_object($returned)) {
+            if (!self::isAllowedEloquentModelFunction($name) || $reflectionMethod->getNumberOfParameters() > 0) {
+                continue;
+            }
 
-                                if (self::isAnEloquentRelation($returned)) {
-                                    $items = [];
-                                    $relationData = $returned->getResults();
+            try {
+                $items = [];
+                $returned = $reflectionMethod->invoke($value);
 
-                                    if (\is_object($relationData)) {
-                                        //Collection with Models
-                                        foreach ($relationData as $model) {
-                                            if(\is_object($model)) {
-                                                $items[] = self::getModelData($serializer, $model);
-                                            }
-                                        }
-                                    } elseif(\is_object($relationData) && $relationData instanceof Model) {
-                                        //Single element returned.
-                                        $items[] = self::getModelData($serializer, $relationData);
-                                    }
-
-                                    if (!empty($items)) {
-                                        $methods[$name] = [
-                                            Serializer::MAP_TYPE => 'array',
-                                            Serializer::SCALAR_VALUE => $items,
-                                        ];
-                                    }
-                                }
-                            }
-                        }
-                    } catch (ErrorException $e) {
-                    }
+                if (!(is_object($returned) && self::isAnEloquentRelation($returned))) {
+                    continue;
                 }
+
+                $relationData = $returned->getResults();
+
+                if ($relationData instanceof \Traversable) {
+                    //Something traversable with Models
+                    foreach ($relationData as $model) {
+                        if ($model instanceof Model) {
+                            $items[] = self::getModelData($serializer, $model);
+                        }
+                    }
+                } elseif ($relationData instanceof Model) {
+                    //Single element returned.
+                    $items[] = self::getModelData($serializer, $relationData);
+                }
+
+                if (!empty($items)) {
+                    $methods[$name] = [
+                        Serializer::MAP_TYPE => 'array',
+                        Serializer::SCALAR_VALUE => $items,
+                    ];
+                }
+            } catch (ErrorException $e) {
             }
         }
 
@@ -122,7 +121,7 @@ class RelationshipPropertyExtractor
      */
     protected static function isAllowedEloquentModelFunction($name)
     {
-         return false === in_array($name, self::$forbiddenFunction, true);
+        return false === in_array($name, self::$forbiddenFunction, true);
     }
 
     /**
