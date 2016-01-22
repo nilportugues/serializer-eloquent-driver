@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Author: Nil Portugués Calderó <contact@nilportugues.com>
  * Date: 12/01/16
@@ -8,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace NilPortugues\Tests\Serializer\Drivers\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +32,6 @@ class Profile extends Model
      */
     public function user()
     {
-        return $this->belongTo(User::class);
+        return $this->belongsTo(User::class);
     }
 }

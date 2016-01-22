@@ -516,4 +516,78 @@ class DriverTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $output);
     }
+
+    public function testSerializeModelWithInvertedOneToOneRelation()
+    {
+        $profile = Profile::with('user')->find(1);
+
+        $driver = new EloquentDriver();
+        $output = $driver->serialize($profile);
+
+        $expected = array(
+            '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Profile',
+            'id' => array(
+                '@scalar' => 'integer',
+                '@value' => '1',
+            ),
+            'user_id' => array(
+                '@scalar' => 'string',
+                '@value' => '1',
+            ),
+            'gravatar' => array(
+                '@scalar' => 'string',
+                '@value' => 'ThisIsAVeryRandomHash',
+            ),
+            'created_at' => array(
+                '@scalar' => 'string',
+                '@value' => '2016-01-13 00:06:16',
+            ),
+            'updated_at' => array(
+                '@scalar' => 'string',
+                '@value' => '2016-01-13 00:06:16',
+            ),
+            'user' => array(
+                '@map' => 'array',
+                '@value' => array(
+                    0 => array(
+                        '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\User',
+                        'id' => array(
+                                '@scalar' => 'integer',
+                                '@value' => '1',
+                            ),
+                        'account_manager_id' => array(
+                                '@scalar' => 'string',
+                                '@value' => '1',
+                            ),
+                        'username' => array(
+                                '@scalar' => 'string',
+                                '@value' => 'Nil',
+                            ),
+                        'password' => array(
+                                '@scalar' => 'string',
+                                '@value' => 'password',
+                            ),
+                        'email' => array(
+                                '@scalar' => 'string',
+                                '@value' => 'test@example.com',
+                            ),
+                        'created_at' => array(
+                                '@scalar' => 'string',
+                                '@value' => '2016-01-13 00:06:16',
+                            ),
+                        'updated_at' => array(
+                                '@scalar' => 'string',
+                                '@value' => '2016-01-13 00:06:16',
+                            ),
+                        'deleted_at' => array(
+                                '@scalar' => 'NULL',
+                                '@value' => null
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $this->assertEquals($expected, $output);
+    }
 }
