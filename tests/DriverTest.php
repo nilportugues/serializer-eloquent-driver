@@ -54,7 +54,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase
         $like = new Like();
         $like->user_id = $user->id;
         $like->likeable_id = $order->id;
-        $like->likeable_type = Order::class;
+        $like->likeable_type = Orders::class;
         $like->created_at = '2016-01-22 11:33:41';
         $like->updated_at = '2016-01-22 11:33:41';
         $like->save();
