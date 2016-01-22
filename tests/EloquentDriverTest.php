@@ -21,7 +21,17 @@ class EloquentDriverTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        $manager = new AccountManager();
+        $manager->username = 'Joe';
+        $manager->password = 'password';
+        $manager->email = 'joe@example.com';
+        $manager->created_at = '2016-01-13 00:06:16';
+        $manager->updated_at = '2016-01-13 00:06:16';
+        $manager->timestamps = false;
+        $manager->save();
+
         $user = new User();
+        $user->account_manager_id = $manager->id;
         $user->username = 'Nil';
         $user->password = 'password';
         $user->email = 'test@example.com';
@@ -44,6 +54,10 @@ class EloquentDriverTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             '@type' => 'stdClass',
             'id' => array(
+                    '@scalar' => 'string',
+                    '@value' => '1',
+                ),
+            'account_manager_id' => array(
                     '@scalar' => 'string',
                     '@value' => '1',
                 ),

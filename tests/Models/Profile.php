@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class User.
  */
-class User extends Model
+class Profile extends Model
 {
     /**
      * @var bool
@@ -25,23 +25,13 @@ class User extends Model
     /**
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'profiles';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function latestOrders()
+    public function user()
     {
-        return $this->hasMany(Orders::class, 'user_id')->limit(10);
-    }
-
-    public function groups()
-    {
-        return $this->belongsToMany(Group::class);
-    }
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
+        return $this->belongTo(User::class);
     }
 }

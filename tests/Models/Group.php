@@ -15,33 +15,30 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class User.
  */
-class User extends Model
+class Group extends Model
 {
     /**
      * @var bool
      */
-    public $timestamps = true;
+    public $timestamps = false;
+
+    /**
+     * @var array
+     */
+    public $fillable = ['name'];
 
     /**
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'groups';
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function latestOrders()
+    public function users()
     {
-        return $this->hasMany(Orders::class, 'user_id')->limit(10);
+        return $this->belongsToMany(User::class);
     }
 
-    public function groups()
+    public function orders()
     {
-        return $this->belongsToMany(Group::class);
-    }
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
+        return $this->hasManyThrough(Orders::Class, User::class);
     }
 }

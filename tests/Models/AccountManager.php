@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class User.
  */
-class User extends Model
+class AccountManager extends Model
 {
     /**
      * @var bool
@@ -25,23 +25,15 @@ class User extends Model
     /**
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'accountmanagers';
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function latestOrders()
+    public function orders()
     {
-        return $this->hasMany(Orders::class, 'user_id')->limit(10);
+        return $this->hasManyThrough(Orders::class, User::class);
     }
 
-    public function groups()
+    public function likes()
     {
-        return $this->belongsToMany(Group::class);
-    }
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
+        return $this->morphMany('NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Like', 'likeable');
     }
 }
