@@ -24,6 +24,9 @@ class Orders extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function likes()
     {
         return $this->morphMany('NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Like', 'likeable');

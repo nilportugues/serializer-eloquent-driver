@@ -5,6 +5,8 @@ include __DIR__.'/../vendor/autoload.php';
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Schema\Blueprint;
 
+file_put_contents(__DIR__.'/database.db', '');
+
 $capsule = new Capsule();
 
 $capsule->addConnection(array(
@@ -15,8 +17,6 @@ $capsule->addConnection(array(
 
 $capsule->bootEloquent();
 $capsule->setAsGlobal();
-
-file_put_contents(__DIR__.'/database.db', '');
 
 Capsule::schema('default')->dropIfExists('accountmanagers');
 Capsule::schema('default')->create('accountmanagers', function (Blueprint $table) {

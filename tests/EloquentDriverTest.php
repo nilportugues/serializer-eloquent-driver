@@ -1,12 +1,4 @@
 <?php
-/**
- * Author: Nil Portugués Calderó <contact@nilportugues.com>
- * Date: 12/01/16
- * Time: 23:49.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace NilPortugues\Tests\Serializer\Drivers\Eloquent;
 
