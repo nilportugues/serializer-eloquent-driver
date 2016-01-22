@@ -1,17 +1,10 @@
 <?php
-/**
- * Author: Nil Portugués Calderó <contact@nilportugues.com>
- * Date: 12/01/16
- * Time: 23:49.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace NilPortugues\Tests\Serializer\Drivers\Eloquent;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use NilPortugues\Serializer\Drivers\Eloquent\EloquentDriver;
+use NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\AccountManager;
 use NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\User;
 
 /**
@@ -21,7 +14,17 @@ class EloquentDriverTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        $manager = new AccountManager();
+        $manager->username = 'Joe';
+        $manager->password = 'password';
+        $manager->email = 'joe@example.com';
+        $manager->created_at = '2016-01-13 00:06:16';
+        $manager->updated_at = '2016-01-13 00:06:16';
+        $manager->timestamps = false;
+        $manager->save();
+
         $user = new User();
+        $user->account_manager_id = $manager->id;
         $user->username = 'Nil';
         $user->password = 'password';
         $user->email = 'test@example.com';
@@ -44,6 +47,10 @@ class EloquentDriverTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             '@type' => 'stdClass',
             'id' => array(
+                    '@scalar' => 'string',
+                    '@value' => '1',
+                ),
+            'account_manager_id' => array(
                     '@scalar' => 'string',
                     '@value' => '1',
                 ),

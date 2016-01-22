@@ -4,24 +4,27 @@ namespace NilPortugues\Tests\Serializer\Drivers\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Orders extends Model
+/**
+ * Class User.
+ */
+class AccountManager extends Model
 {
     /**
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * @var string
      */
-    protected $table = 'orders';
+    protected $table = 'accountmanagers';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function user()
+    public function orders()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->hasManyThrough(Orders::class, User::class);
     }
 
     /**

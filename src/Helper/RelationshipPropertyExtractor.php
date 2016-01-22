@@ -8,6 +8,7 @@ use NilPortugues\Serializer\Drivers\Eloquent\Driver;
 use NilPortugues\Serializer\Serializer;
 use ReflectionClass;
 use ReflectionMethod;
+use Traversable;
 
 class RelationshipPropertyExtractor
 {
@@ -68,7 +69,7 @@ class RelationshipPropertyExtractor
     ) {
         $methods = [];
         foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            if (\ltrim($method->class, '\\') !== \ltrim($className, '\\')) {
+            if (ltrim($method->class, '\\') !== ltrim($className, '\\')) {
                 continue;
             }
 
@@ -83,13 +84,13 @@ class RelationshipPropertyExtractor
                 $items = [];
                 $returned = $reflectionMethod->invoke($value);
 
-                if (!(is_object($returned) && self::isAnEloquentRelation($returned))) {
+                if (!(\is_object($returned) && self::isAnEloquentRelation($returned))) {
                     continue;
                 }
 
                 $relationData = $returned->getResults();
 
-                if ($relationData instanceof \Traversable) {
+                if ($relationData instanceof Traversable) {
                     //Something traversable with Models
                     foreach ($relationData as $model) {
                         if ($model instanceof Model) {

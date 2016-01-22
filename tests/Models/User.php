@@ -1,12 +1,4 @@
 <?php
-/**
- * Author: Nil Portugués Calderó <contact@nilportugues.com>
- * Date: 12/01/16
- * Time: 23:18.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace NilPortugues\Tests\Serializer\Drivers\Eloquent\Models;
 
@@ -33,5 +25,21 @@ class User extends Model
     public function latestOrders()
     {
         return $this->hasMany(Orders::class, 'user_id')->limit(10);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
     }
 }
