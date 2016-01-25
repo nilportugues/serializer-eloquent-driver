@@ -41,7 +41,7 @@ Code all examples provided in the Eloquent documentation for relationships as te
 - [X] Has Many Through
 - [ ] Polymorphic Relations
 - [ ] Many To Many
-- [] Many To Many Polymorphic Relations
+- [ ] Many To Many Polymorphic Relations
 
 ## Contribute
 
