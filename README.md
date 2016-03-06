@@ -5,6 +5,7 @@
 [![Latest Stable Version](https://poser.pugx.org/nilportugues/serializer-eloquent/v/stable?)](https://packagist.org/packages/nilportugues/serializer-eloquent) 
 [![Total Downloads](https://poser.pugx.org/nilportugues/serializer-eloquent/downloads?)](https://packagist.org/packages/nilportugues/serializer-eloquent) 
 [![License](https://poser.pugx.org/nilportugues/serializer-eloquent/license?)](https://packagist.org/packages/nilportugues/serializer-eloquent) 
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://paypal.me/nilportugues)
 
 ## What?
 This is a driver for the [Serializer](https://github.com/nilportugues/serializer) library caring of Eloquent ORM model serialization.
