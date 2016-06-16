@@ -143,7 +143,7 @@ class RelationshipPropertyExtractor
      */
     protected static function getModelData(Driver $serializer, Model $model)
     {
-        $stdClass = (object) $model->attributesToArray();
+        $stdClass = (object) array_merge($model->attributesToArray(), $model->relationsToArray());
         $data = $serializer->serialize($stdClass);
         $data[Serializer::CLASS_IDENTIFIER_KEY] = get_class($model);
 
