@@ -257,6 +257,19 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                                                         '@scalar' => 'string',
                                                         '@value' => 'customers',
                                                     ),
+                                                    'pivot' => array(
+                                                        '@map' => 'array',
+                                                        '@value' => array(
+                                                            'user_id' => array(
+                                                                '@scalar' => 'string',
+                                                                '@value' => '1',
+                                                            ),
+                                                            'group_id' => array(
+                                                                '@scalar' => 'string',
+                                                                '@value' => '1',
+                                                            ),
+                                                        ),
+                                                    ),
                                             ),
                                             1 => array(
                                                     '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Group',
@@ -268,6 +281,19 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                                                         '@scalar' => 'string',
                                                         '@value' => 'platin-customers',
                                                     ),
+                                                    'pivot' => array(
+                                                        '@map' => 'array',
+                                                        '@value' => array(
+                                                            'user_id' => array(
+                                                                '@scalar' => 'string',
+                                                                '@value' => '1',
+                                                            ),
+                                                            'group_id' => array(
+                                                                '@scalar' => 'string',
+                                                                '@value' => '2',
+                                                            ),
+                                                        ),
+                                                    ),
                                             ),
                                             2 => array(
                                                     '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Group',
@@ -278,6 +304,19 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                                                     'name' => array(
                                                         '@scalar' => 'string',
                                                         '@value' => 'users',
+                                                    ),
+                                                    'pivot' => array(
+                                                        '@map' => 'array',
+                                                        '@value' => array(
+                                                            'user_id' => array(
+                                                                '@scalar' => 'string',
+                                                                '@value' => '1',
+                                                            ),
+                                                            'group_id' => array(
+                                                                '@scalar' => 'string',
+                                                                '@value' => '3',
+                                                            ),
+                                                        ),
                                                     ),
                                             ),
                                     ),
@@ -347,6 +386,23 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                                             '@scalar' => 'NULL',
                                             '@value' => null,
                                         ),
+                                        'pivot' => array(
+                                            '@map' => 'array',
+                                            '@value' => array(
+                                                'object_id' => array(
+                                                    '@scalar' => 'string',
+                                                    '@value' => '1',
+                                                ),
+                                                'subject_id' => array(
+                                                    '@scalar' => 'string',
+                                                    '@value' => '2',
+                                                ),
+                                                'relationship' => array(
+                                                    '@scalar' => 'string',
+                                                    '@value' => 'Github Buddies',
+                                                ),
+                                            ),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -388,6 +444,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                     ),
                 ),
         );
+
 
         $this->assertEquals($expected, $output);
     }
@@ -573,6 +630,19 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                                         '@scalar' => 'string',
                                         '@value' => 'customers',
                                     ),
+                                    'pivot' => array(
+                                        '@map' => 'array',
+                                        '@value' => array(
+                                            'user_id' => array(
+                                                '@scalar' => 'string',
+                                                '@value' => '1',
+                                            ),
+                                            'group_id' => array(
+                                                '@scalar' => 'string',
+                                                '@value' => '1',
+                                            ),
+                                        ),
+                                    ),
                             ),
                             1 => array(
                                     '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Group',
@@ -584,6 +654,19 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                                         '@scalar' => 'string',
                                         '@value' => 'platin-customers',
                                     ),
+                                    'pivot' => array(
+                                        '@map' => 'array',
+                                        '@value' => array(
+                                            'user_id' => array(
+                                                '@scalar' => 'string',
+                                                '@value' => '1',
+                                            ),
+                                            'group_id' => array(
+                                                '@scalar' => 'string',
+                                                '@value' => '2',
+                                            ),
+                                        ),
+                                    ),
                             ),
                             2 => array(
                                     '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Group',
@@ -594,6 +677,19 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                                     'name' => array(
                                         '@scalar' => 'string',
                                         '@value' => 'users',
+                                    ),
+                                    'pivot' => array(
+                                        '@map' => 'array',
+                                        '@value' => array(
+                                            'user_id' => array(
+                                                '@scalar' => 'string',
+                                                '@value' => '1',
+                                            ),
+                                            'group_id' => array(
+                                                '@scalar' => 'string',
+                                                '@value' => '3',
+                                            ),
+                                        ),
                                     ),
                             ),
                     ),
@@ -662,6 +758,23 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                         'deleted_at' => array(
                             '@scalar' => 'NULL',
                             '@value' => null,
+                        ),
+                        'pivot' => array(
+                            '@map' => 'array',
+                            '@value' => array(
+                                'object_id' => array(
+                                    '@scalar' => 'string',
+                                    '@value' => '1',
+                                ),
+                                'subject_id' => array(
+                                    '@scalar' => 'string',
+                                    '@value' => '2',
+                                ),
+                                'relationship' => array(
+                                    '@scalar' => 'string',
+                                    '@value' => 'Github Buddies',
+                                ),
+                            ),
                         ),
                     ),
                 ),
