@@ -42,4 +42,12 @@ class User extends Model
     {
         return $this->hasOne(Profile::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function friends()
+    {
+        return $this->belongsToMany(User::class, 'user_user', 'object_id', 'subject_id')->withPivot('relationship');
+    }
 }
