@@ -41,6 +41,13 @@ Capsule::schema('default')->create('users', function (Blueprint $table) {
     $table->softDeletes();
 });
 
+Capsule::schema('default')->dropIfExists('user_user');
+Capsule::schema('default')->create('user_user', function (Blueprint $table) {
+    $table->integer('object_id');
+    $table->integer('subject_id');
+    $table->string('relationship', 255)->nullable();
+});
+
 Capsule::schema('default')->dropIfExists('profiles');
 Capsule::schema('default')->create('profiles', function (Blueprint $table) {
     $table->primary('id');

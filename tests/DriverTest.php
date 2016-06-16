@@ -32,6 +32,17 @@ class DriverTest extends \PHPUnit_Framework_TestCase
         $user->updated_at = '2016-01-13 00:06:16';
         $user->save();
 
+        $user2 = new User();
+        $user2->account_manager_id = $manager->id;
+        $user2->username = 'Oskar';
+        $user2->password = 'password';
+        $user2->email = 'test2@example.com';
+        $user2->created_at = '2016-06-16 11:09:33';
+        $user2->updated_at = '2016-06-16 11:09:33';
+        $user2->save();
+
+        $user->friends()->attach($user2, ['relationship' => 'Github Buddies']);
+
         $profile = new Profile();
         $profile->user_id = $user->id;
         $profile->gravatar = 'ThisIsAVeryRandomHash';
@@ -72,6 +83,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase
     {
         Capsule::table('accountmanagers')->delete();
         Capsule::table('users')->delete();
+        Capsule::table('user_user')->delete();
         Capsule::table('orders')->delete();
         Capsule::table('groups')->delete();
         Capsule::table('group_user')->delete();
@@ -117,6 +129,41 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                     'updated_at' => array(
                         '@scalar' => 'string',
                         '@value' => '2016-01-13 00:06:16',
+                    ),
+                    'deleted_at' => array(
+                        '@scalar' => 'NULL',
+                        '@value' => null,
+                    ),
+                ),
+                1 => array(
+                    '@type' => 'stdClass',
+                    'id' => array(
+                        '@scalar' => 'string',
+                        '@value' => '2',
+                    ),
+                    'account_manager_id' => array(
+                        '@scalar' => 'string',
+                        '@value' => '1',
+                    ),
+                    'username' => array(
+                        '@scalar' => 'string',
+                        '@value' => 'Oskar',
+                    ),
+                    'password' => array(
+                        '@scalar' => 'string',
+                        '@value' => 'password',
+                    ),
+                    'email' => array(
+                        '@scalar' => 'string',
+                        '@value' => 'test2@example.com',
+                    ),
+                    'created_at' => array(
+                        '@scalar' => 'string',
+                        '@value' => '2016-06-16 11:09:33',
+                    ),
+                    'updated_at' => array(
+                        '@scalar' => 'string',
+                        '@value' => '2016-06-16 11:09:33',
                     ),
                     'deleted_at' => array(
                         '@scalar' => 'NULL',
@@ -263,7 +310,82 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                                     ),
                                 ),
                             ),
+                            'friends' => array(
+                                '@map' => 'array',
+                                '@value' => array(
+                                    0 => array(
+                                        '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\User',
+                                        'id' => array(
+                                            '@scalar' => 'integer',
+                                            '@value' => '2',
+                                        ),
+                                        'account_manager_id' => array(
+                                            '@scalar' => 'string',
+                                            '@value' => '1',
+                                        ),
+                                        'username' => array(
+                                            '@scalar' => 'string',
+                                            '@value' => 'Oskar',
+                                        ),
+                                        'password' => array(
+                                            '@scalar' => 'string',
+                                            '@value' => 'password',
+                                        ),
+                                        'email' => array(
+                                            '@scalar' => 'string',
+                                            '@value' => 'test2@example.com',
+                                        ),
+                                        'created_at' => array(
+                                            '@scalar' => 'string',
+                                            '@value' => '2016-06-16 11:09:33',
+                                        ),
+                                        'updated_at' => array(
+                                            '@scalar' => 'string',
+                                            '@value' => '2016-06-16 11:09:33',
+                                        ),
+                                        'deleted_at' => array(
+                                            '@scalar' => 'NULL',
+                                            '@value' => null,
+                                        ),
+                                    ),
+                                ),
+                            ),
                         ),
+                    1 => array(
+                        '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\User',
+                        'id' => array(
+                            '@scalar' => 'integer',
+                            '@value' => '2',
+                        ),
+                        'account_manager_id' => array(
+                            '@scalar' => 'string',
+                            '@value' => '1',
+                        ),
+                        'username' => array(
+                            '@scalar' => 'string',
+                            '@value' => 'Oskar',
+                        ),
+                        'password' => array(
+                            '@scalar' => 'string',
+                            '@value' => 'password',
+                        ),
+                        'email' => array(
+                            '@scalar' => 'string',
+                            '@value' => 'test2@example.com',
+                        ),
+                        'created_at' => array(
+                            '@scalar' => 'string',
+                            '@value' => '2016-06-16 11:09:33',
+                        ),
+                        'updated_at' => array(
+                            '@scalar' => 'string',
+                            '@value' => '2016-06-16 11:09:33',
+                        ),
+                        'deleted_at' => array(
+                            '@scalar' => 'NULL',
+                            '@value' => null,
+                        ),
+                    ),
                 ),
         );
 
@@ -500,6 +622,46 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                         'updated_at' => array(
                             '@scalar' => 'string',
                             '@value' => '2016-01-13 00:06:16',
+                        ),
+                    ),
+                ),
+            ),
+            'friends' => array(
+                '@map' => 'array',
+                '@value' => array(
+                    0 => array(
+                        '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\User',
+                        'id' => array(
+                            '@scalar' => 'integer',
+                            '@value' => '2',
+                        ),
+                        'account_manager_id' => array(
+                            '@scalar' => 'string',
+                            '@value' => '1',
+                        ),
+                        'username' => array(
+                            '@scalar' => 'string',
+                            '@value' => 'Oskar',
+                        ),
+                        'password' => array(
+                            '@scalar' => 'string',
+                            '@value' => 'password',
+                        ),
+                        'email' => array(
+                            '@scalar' => 'string',
+                            '@value' => 'test2@example.com',
+                        ),
+                        'created_at' => array(
+                            '@scalar' => 'string',
+                            '@value' => '2016-06-16 11:09:33',
+                        ),
+                        'updated_at' => array(
+                            '@scalar' => 'string',
+                            '@value' => '2016-06-16 11:09:33',
+                        ),
+                        'deleted_at' => array(
+                            '@scalar' => 'NULL',
+                            '@value' => null,
                         ),
                     ),
                 ),
