@@ -81,7 +81,6 @@ class RelationshipPropertyExtractor
             }
 
             try {
-                $items = [];
                 $returned = $reflectionMethod->invoke($value);
 
                 if (!(\is_object($returned) && self::isAnEloquentRelation($returned))) {
@@ -92,22 +91,23 @@ class RelationshipPropertyExtractor
 
                 if ($relationData instanceof Traversable) {
                     //Something traversable with Models
+                    $items = [];
+
                     foreach ($relationData as $model) {
                         if ($model instanceof Model) {
                             $items[] = self::getModelData($serializer, $model);
                         }
                     }
-                } elseif ($relationData instanceof Model) {
-                    //Single element returned.
-                    $items[] = self::getModelData($serializer, $relationData);
-                }
 
-                if (!empty($items)) {
                     $methods[$name] = [
                         Serializer::MAP_TYPE => 'array',
                         Serializer::SCALAR_VALUE => $items,
                     ];
+                } elseif ($relationData instanceof Model) {
+                    //Single element returned.
+                    $methods[$name] = self::getModelData($serializer, $relationData);
                 }
+
             } catch (ErrorException $e) {
             }
         }
