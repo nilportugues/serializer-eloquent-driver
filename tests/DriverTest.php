@@ -185,208 +185,278 @@ class DriverTest extends \PHPUnit_Framework_TestCase
 
         $expected = array(
             '@map' => 'array',
-            '@value' => array(
-                    0 => array(
-                            '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\User',
-                            'id' => array(
+            '@value' =>
+            array(
+                0 =>
+                array(
+                    '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\User',
+                    'id' =>
+                    array(
+                        '@scalar' => 'integer',
+                        '@value' => 1,
+                    ),
+                    'account_manager_id' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => '1',
+                    ),
+                    'username' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => 'Nil',
+                    ),
+                    'password' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => 'password',
+                    ),
+                    'email' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => 'test@example.com',
+                    ),
+                    'created_at' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => '2016-01-13 00:06:16',
+                    ),
+                    'updated_at' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => '2016-01-13 00:06:16',
+                    ),
+                    'deleted_at' =>
+                    array(
+                        '@scalar' => 'NULL',
+                        '@value' => null,
+                    ),
+                    'latestOrders' =>
+                    array(
+                        '@map' => 'array',
+                        '@value' =>
+                        array(
+                            0 =>
+                            array(
+                                '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\Orders',
+                                'id' =>
+                                array(
                                     '@scalar' => 'integer',
-                                    '@value' => '1',
+                                    '@value' => 1,
                                 ),
-                            'account_manager_id' => array(
+                                'user_id' =>
+                                array(
                                     '@scalar' => 'string',
                                     '@value' => '1',
                                 ),
-                            'username' => array(
+                                'name' =>
+                                array(
                                     '@scalar' => 'string',
-                                    '@value' => 'Nil',
+                                    '@value' => 'Some item',
                                 ),
-                            'password' => array(
+                                'ordered_at' =>
+                                array(
                                     '@scalar' => 'string',
-                                    '@value' => 'password',
-                                ),
-                            'email' => array(
-                                    '@scalar' => 'string',
-                                    '@value' => 'test@example.com',
-                                ),
-                            'created_at' => array(
-                                    '@scalar' => 'string',
-                                    '@value' => '2016-01-13 00:06:16',
-                                ),
-                            'updated_at' => array(
-                                    '@scalar' => 'string',
-                                    '@value' => '2016-01-13 00:06:16',
-                                ),
-                            'deleted_at' => array(
-                                    '@scalar' => 'NULL',
-                                    '@value' => null,
-                                ),
-                            'latestOrders' => array(
-                                    '@map' => 'array',
-                                    '@value' => array(
-                                            0 => array(
-                                                    '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\Orders',
-                                                    'id' => array(
-                                                            '@scalar' => 'integer',
-                                                            '@value' => '1',
-                                                        ),
-                                                    'user_id' => array(
-                                                            '@scalar' => 'string',
-                                                            '@value' => '1',
-                                                        ),
-                                                    'name' => array(
-                                                            '@scalar' => 'string',
-                                                            '@value' => 'Some item',
-                                                        ),
-                                                    'ordered_at' => array(
-                                                            '@scalar' => 'string',
-                                                            '@value' => '2016-01-14 09:15:20',
-                                                        ),
-                                                ),
-                                        ),
-                                ),
-                            'groups' => array(
-                                    '@map' => 'array',
-                                    '@value' => array(
-                                            0 => array(
-                                                    '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Group',
-                                                    'id' => array(
-                                                        '@scalar' => 'integer',
-                                                        '@value' => '1',
-                                                    ),
-                                                    'name' => array(
-                                                        '@scalar' => 'string',
-                                                        '@value' => 'customers',
-                                                    ),
-                                            ),
-                                            1 => array(
-                                                    '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Group',
-                                                    'id' => array(
-                                                        '@scalar' => 'integer',
-                                                        '@value' => '2',
-                                                    ),
-                                                    'name' => array(
-                                                        '@scalar' => 'string',
-                                                        '@value' => 'platin-customers',
-                                                    ),
-                                            ),
-                                            2 => array(
-                                                    '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Group',
-                                                    'id' => array(
-                                                        '@scalar' => 'integer',
-                                                        '@value' => '3',
-                                                    ),
-                                                    'name' => array(
-                                                        '@scalar' => 'string',
-                                                        '@value' => 'users',
-                                                    ),
-                                            ),
-                                    ),
-                            ),
-                            'profile' => array(
-                                '@map' => 'array',
-                                '@value' => array(
-                                    0 => array(
-                                        '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Profile',
-                                        'id' => array(
-                                            '@scalar' => 'integer',
-                                            '@value' => '1',
-                                        ),
-                                        'user_id' => array(
-                                            '@scalar' => 'string',
-                                            '@value' => '1',
-                                        ),
-                                        'gravatar' => array(
-                                            '@scalar' => 'string',
-                                            '@value' => 'ThisIsAVeryRandomHash',
-                                        ),
-                                        'created_at' => array(
-                                            '@scalar' => 'string',
-                                            '@value' => '2016-01-13 00:06:16',
-                                        ),
-                                        'updated_at' => array(
-                                            '@scalar' => 'string',
-                                            '@value' => '2016-01-13 00:06:16',
-                                        ),
-                                    ),
-                                ),
-                            ),
-                            'friends' => array(
-                                '@map' => 'array',
-                                '@value' => array(
-                                    0 => array(
-                                        '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\User',
-                                        'id' => array(
-                                            '@scalar' => 'integer',
-                                            '@value' => '2',
-                                        ),
-                                        'account_manager_id' => array(
-                                            '@scalar' => 'string',
-                                            '@value' => '1',
-                                        ),
-                                        'username' => array(
-                                            '@scalar' => 'string',
-                                            '@value' => 'Oskar',
-                                        ),
-                                        'password' => array(
-                                            '@scalar' => 'string',
-                                            '@value' => 'password',
-                                        ),
-                                        'email' => array(
-                                            '@scalar' => 'string',
-                                            '@value' => 'test2@example.com',
-                                        ),
-                                        'created_at' => array(
-                                            '@scalar' => 'string',
-                                            '@value' => '2016-06-16 11:09:33',
-                                        ),
-                                        'updated_at' => array(
-                                            '@scalar' => 'string',
-                                            '@value' => '2016-06-16 11:09:33',
-                                        ),
-                                        'deleted_at' => array(
-                                            '@scalar' => 'NULL',
-                                            '@value' => null,
-                                        ),
-                                    ),
+                                    '@value' => '2016-01-14 09:15:20',
                                 ),
                             ),
                         ),
-                    1 => array(
-                        '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\User',
-                        'id' => array(
+                    ),
+                    'groups' =>
+                    array(
+                        '@map' => 'array',
+                        '@value' =>
+                        array(
+                            0 =>
+                            array(
+                                '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\Group',
+                                'id' =>
+                                array(
+                                    '@scalar' => 'integer',
+                                    '@value' => 1,
+                                ),
+                                'name' =>
+                                array(
+                                    '@scalar' => 'string',
+                                    '@value' => 'customers',
+                                ),
+                            ),
+                            1 =>
+                            array(
+                                '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\Group',
+                                'id' =>
+                                array(
+                                    '@scalar' => 'integer',
+                                    '@value' => 2,
+                                ),
+                                'name' =>
+                                array(
+                                    '@scalar' => 'string',
+                                    '@value' => 'platin-customers',
+                                ),
+                            ),
+                            2 =>
+                            array(
+                                '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\Group',
+                                'id' =>
+                                array(
+                                    '@scalar' => 'integer',
+                                    '@value' => 3,
+                                ),
+                                'name' =>
+                                array(
+                                    '@scalar' => 'string',
+                                    '@value' => 'users',
+                                ),
+                            ),
+                        ),
+                    ),
+                    'profile' =>
+                    array(
+                        '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\Profile',
+                        'id' =>
+                        array(
                             '@scalar' => 'integer',
-                            '@value' => '2',
+                            '@value' => 1,
                         ),
-                        'account_manager_id' => array(
+                        'user_id' =>
+                        array(
                             '@scalar' => 'string',
                             '@value' => '1',
                         ),
-                        'username' => array(
+                        'gravatar' =>
+                        array(
                             '@scalar' => 'string',
-                            '@value' => 'Oskar',
+                            '@value' => 'ThisIsAVeryRandomHash',
                         ),
-                        'password' => array(
+                        'created_at' =>
+                        array(
                             '@scalar' => 'string',
-                            '@value' => 'password',
+                            '@value' => '2016-01-13 00:06:16',
                         ),
-                        'email' => array(
+                        'updated_at' =>
+                        array(
                             '@scalar' => 'string',
-                            '@value' => 'test2@example.com',
+                            '@value' => '2016-01-13 00:06:16',
                         ),
-                        'created_at' => array(
-                            '@scalar' => 'string',
-                            '@value' => '2016-06-16 11:09:33',
-                        ),
-                        'updated_at' => array(
-                            '@scalar' => 'string',
-                            '@value' => '2016-06-16 11:09:33',
-                        ),
-                        'deleted_at' => array(
-                            '@scalar' => 'NULL',
-                            '@value' => null,
+                    ),
+                    'friends' =>
+                    array(
+                        '@map' => 'array',
+                        '@value' =>
+                        array(
+                            0 =>
+                            array(
+                                '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\User',
+                                'id' =>
+                                array(
+                                    '@scalar' => 'integer',
+                                    '@value' => 2,
+                                ),
+                                'account_manager_id' =>
+                                array(
+                                    '@scalar' => 'string',
+                                    '@value' => '1',
+                                ),
+                                'username' =>
+                                array(
+                                    '@scalar' => 'string',
+                                    '@value' => 'Oskar',
+                                ),
+                                'password' =>
+                                array(
+                                    '@scalar' => 'string',
+                                    '@value' => 'password',
+                                ),
+                                'email' =>
+                                array(
+                                    '@scalar' => 'string',
+                                    '@value' => 'test2@example.com',
+                                ),
+                                'created_at' =>
+                                array(
+                                    '@scalar' => 'string',
+                                    '@value' => '2016-06-16 11:09:33',
+                                ),
+                                'updated_at' =>
+                                array(
+                                    '@scalar' => 'string',
+                                    '@value' => '2016-06-16 11:09:33',
+                                ),
+                                'deleted_at' =>
+                                array(
+                                    '@scalar' => 'NULL',
+                                    '@value' => null,
+                                ),
+                            ),
                         ),
                     ),
                 ),
+                1 =>
+                array(
+                    '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\User',
+                    'id' =>
+                    array(
+                        '@scalar' => 'integer',
+                        '@value' => 2,
+                    ),
+                    'account_manager_id' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => '1',
+                    ),
+                    'username' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => 'Oskar',
+                    ),
+                    'password' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => 'password',
+                    ),
+                    'email' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => 'test2@example.com',
+                    ),
+                    'created_at' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => '2016-06-16 11:09:33',
+                    ),
+                    'updated_at' =>
+                    array(
+                        '@scalar' => 'string',
+                        '@value' => '2016-06-16 11:09:33',
+                    ),
+                    'deleted_at' =>
+                    array(
+                        '@scalar' => 'NULL',
+                        '@value' => null,
+                    ),
+                    'latestOrders' =>
+                    array(
+                        '@map' => 'array',
+                        '@value' =>
+                        array(
+                        ),
+                    ),
+                    'groups' =>
+                    array(
+                        '@map' => 'array',
+                        '@value' =>
+                        array(
+                        ),
+                    ),
+                    'friends' =>
+                    array(
+                        '@map' => 'array',
+                        '@value' =>
+                        array(
+                        ),
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $output);
@@ -599,31 +669,26 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                     ),
             ),
             'profile' => array(
-                '@map' => 'array',
-                '@value' => array(
-                    0 => array(
-                        '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Profile',
-                        'id' => array(
-                            '@scalar' => 'integer',
-                            '@value' => '1',
-                        ),
-                        'user_id' => array(
-                            '@scalar' => 'string',
-                            '@value' => '1',
-                        ),
-                        'gravatar' => array(
-                            '@scalar' => 'string',
-                            '@value' => 'ThisIsAVeryRandomHash',
-                        ),
-                        'created_at' => array(
-                            '@scalar' => 'string',
-                            '@value' => '2016-01-13 00:06:16',
-                        ),
-                        'updated_at' => array(
-                            '@scalar' => 'string',
-                            '@value' => '2016-01-13 00:06:16',
-                        ),
-                    ),
+                '@type' => 'NilPortugues\Tests\Serializer\Drivers\Eloquent\Models\Profile',
+                'id' => array(
+                    '@scalar' => 'integer',
+                    '@value' => '1',
+                ),
+                'user_id' => array(
+                    '@scalar' => 'string',
+                    '@value' => '1',
+                ),
+                'gravatar' => array(
+                    '@scalar' => 'string',
+                    '@value' => 'ThisIsAVeryRandomHash',
+                ),
+                'created_at' => array(
+                    '@scalar' => 'string',
+                    '@value' => '2016-01-13 00:06:16',
+                ),
+                'updated_at' => array(
+                    '@scalar' => 'string',
+                    '@value' => '2016-01-13 00:06:16',
                 ),
             ),
             'friends' => array(
@@ -701,43 +766,38 @@ class DriverTest extends \PHPUnit_Framework_TestCase
                 '@value' => '2016-01-13 00:06:16',
             ),
             'user' => array(
-                '@map' => 'array',
-                '@value' => array(
-                    0 => array(
-                        '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\User',
-                        'id' => array(
-                                '@scalar' => 'integer',
-                                '@value' => '1',
-                            ),
-                        'account_manager_id' => array(
-                                '@scalar' => 'string',
-                                '@value' => '1',
-                            ),
-                        'username' => array(
-                                '@scalar' => 'string',
-                                '@value' => 'Nil',
-                            ),
-                        'password' => array(
-                                '@scalar' => 'string',
-                                '@value' => 'password',
-                            ),
-                        'email' => array(
-                                '@scalar' => 'string',
-                                '@value' => 'test@example.com',
-                            ),
-                        'created_at' => array(
-                                '@scalar' => 'string',
-                                '@value' => '2016-01-13 00:06:16',
-                            ),
-                        'updated_at' => array(
-                                '@scalar' => 'string',
-                                '@value' => '2016-01-13 00:06:16',
-                            ),
-                        'deleted_at' => array(
-                                '@scalar' => 'NULL',
-                                '@value' => null,
-                        ),
+                '@type' => 'NilPortugues\\Tests\\Serializer\\Drivers\\Eloquent\\Models\\User',
+                'id' => array(
+                        '@scalar' => 'integer',
+                        '@value' => '1',
                     ),
+                'account_manager_id' => array(
+                        '@scalar' => 'string',
+                        '@value' => '1',
+                    ),
+                'username' => array(
+                        '@scalar' => 'string',
+                        '@value' => 'Nil',
+                    ),
+                'password' => array(
+                        '@scalar' => 'string',
+                        '@value' => 'password',
+                    ),
+                'email' => array(
+                        '@scalar' => 'string',
+                        '@value' => 'test@example.com',
+                    ),
+                'created_at' => array(
+                        '@scalar' => 'string',
+                        '@value' => '2016-01-13 00:06:16',
+                    ),
+                'updated_at' => array(
+                        '@scalar' => 'string',
+                        '@value' => '2016-01-13 00:06:16',
+                    ),
+                'deleted_at' => array(
+                        '@scalar' => 'NULL',
+                        '@value' => null,
                 ),
             ),
         );
