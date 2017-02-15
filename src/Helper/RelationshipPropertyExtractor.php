@@ -4,6 +4,7 @@ namespace NilPortugues\Serializer\Drivers\Eloquent\Helper;
 
 use ErrorException;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use NilPortugues\Serializer\Drivers\Eloquent\Driver;
 use NilPortugues\Serializer\Serializer;
 use ReflectionClass;
@@ -132,7 +133,7 @@ class RelationshipPropertyExtractor
      */
     protected static function isAnEloquentRelation($returned)
     {
-        return false !== strpos(get_class($returned), 'Illuminate\Database\Eloquent\Relations');
+        return $returned instanceof Relation;
     }
 
     /**
