@@ -80,6 +80,10 @@ class RelationshipPropertyExtractor
                 continue;
             }
 
+            if (in_array($name, $value->getHidden(), true)) {
+                continue;
+            }
+
             try {
                 $returned = $reflectionMethod->invoke($value);
 
